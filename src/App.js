@@ -6,8 +6,17 @@ import Hello from './Hello.js';
 import NotFound from './NotFound.js';
 
 const routes = [
-  { path: '/', component: Hello }
+  {
+    path: '/',
+    component: Hello,
+    props: { name: "world" }
+  }
 ]
+
+const defaultRoute = {
+  component: NotFound
+}
+
 
 class App extends Component {
   render() {
@@ -17,7 +26,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Router routes={routes} default={NotFound} />
+        <Router routes={routes} defaultRoute={defaultRoute} />
       </div>
     );
   }

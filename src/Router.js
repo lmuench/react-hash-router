@@ -13,11 +13,11 @@ class Router extends Component {
 
   handleNavigation = () => {
     const path = this.getBrowserPath();
-    const component = this.getComponentForPath(path);
-    if (!component) return;
-
+    const route = this.getRouteForPath(path);
+    if (!route) return;
+    
     ReactDOM.render(
-      React.createElement(component, null),
+      React.createElement(route.component, route.props ? route.props : null),
       document.getElementById('component')
     );
   }
@@ -26,10 +26,10 @@ class Router extends Component {
     return window.location.hash.substring(1);
   }
 
-  getComponentForPath = path => {
+  getRouteForPath = path => {
     if (!path) path = '/';
     const route = this.props.routes.find(route => route.path === path);
-    return route ? route.component : this.props.default;
+    return route ? route : this.props.defaultRoute;
   }
 
   render() {

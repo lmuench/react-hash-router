@@ -4,7 +4,7 @@ class NotFound extends Component {
   render() {
     return (
       <div>
-        not found
+        not found {this.props.msg}
       </div>
     );
   }
