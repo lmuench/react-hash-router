@@ -27,6 +27,7 @@ class Router extends Component {
   }
 
   getComponentForPath = path => {
+    if (!path) path = '/';
     const route = this.props.routes.find(route => route.path === path);
     return route ? route.component : this.props.default;
   }

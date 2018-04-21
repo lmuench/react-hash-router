@@ -6,7 +6,7 @@ import Hello from './Hello.js';
 import NotFound from './NotFound.js';
 
 const routes = [
-  { path: '/hello', component: Hello }
+  { path: '/', component: Hello }
 ]
 
 class App extends Component {
