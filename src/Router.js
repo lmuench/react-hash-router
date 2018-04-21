@@ -29,7 +29,7 @@ class Router extends Component {
 
   getRouteForPath = path => {
     if (!path) path = '/';
-    const route = this.props.routes.find(route => path.startsWith(route.path[0]));
+    const route = this.props.routes.find(route => path.startsWith(route.path));
 
     return route ? route : this.props.defaultRoute;
   }
@@ -38,8 +38,10 @@ class Router extends Component {
     if (route.propFromPath) {
       const path = this.getBrowserPath();
       const pathTail = path.slice(route.path.length + 1);
-   
-      route.propFromPath[Object.keys(route.propFromPath)[0]] = pathTail;
+      
+      if (pathTail.length > 0) {
+        route.propFromPath[Object.keys(route.propFromPath)[0]] = pathTail;
+      }
     }
 
     return {
