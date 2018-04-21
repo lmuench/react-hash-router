@@ -3,9 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import Router from './Router.js';
 import Hello from './Hello.js';
+import NotFound from './NotFound.js';
 
 const routes = [
-  { path: '/', component: Hello }
+  { path: '/hello', component: Hello }
 ]
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Router routes={routes} />
+        <Router routes={routes} default={NotFound} />
       </div>
     );
   }
