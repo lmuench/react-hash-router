@@ -7,9 +7,10 @@ import NotFound from './NotFound.js';
 
 const routes = [
   {
-    path: '/',
+    path: '/hello',
     component: Hello,
-    props: { name: "world" }
+    props: { name: 'world' },
+    propFromPath: { id: null }
   }
 ]
 
