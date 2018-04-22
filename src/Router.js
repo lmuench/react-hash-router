@@ -37,7 +37,11 @@ class Router extends Component {
   getPropsForRoute = route => {
     if (route.propFromPath) {
       const path = this.getBrowserPath();
-      const pathTail = path.slice(route.path.length + 1);
+      let pathTail = path.slice(route.path.length + 1);
+
+      if (pathTail.includes('/')) {
+        pathTail = pathTail.slice(0, pathTail.indexOf('/'));
+      }
       
       if (pathTail.length > 0) {
         route.propFromPath[Object.keys(route.propFromPath)[0]] = pathTail;

@@ -10,7 +10,7 @@ const routes = [
     path: '/hello',
     component: Hello,
     props: { name: 'world' },
-    propFromPath: { id: 0 }  // value is used as default value if path doesn't contain one
+    propFromPath: { id: null }  // value is used as default value if path doesn't contain one
   }
 ]
 
