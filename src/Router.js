@@ -58,15 +58,21 @@ class Router extends Component {
 
   getPropsForRoute = (route, browserPath) => {
     const props = route.props ? route.props : {};
-    const routePath = route.path.split('/').slice(1);
 
-    for (let element of route.propsFromPath) {
-      const position = routePath.indexOf(element.segment);
-      
-      if (position < 0) return;
+    if (route.path) {
 
-      props[element.prop] = browserPath[position];
+      const routePath = route.path.split('/').slice(1);
+
+      for (let element of route.propsFromPath) {
+        const position = routePath.indexOf(element.segment);
+
+        if (position < 0) return;
+
+        props[element.prop] = browserPath[position];
+      }
+
     }
+    
     return props;
   }
 
