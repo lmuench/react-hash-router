@@ -4,7 +4,7 @@ class Hello extends Component {
   render() {
     return (
       <div>
-        hello {this.props.name} {this.props.id}
+        hello {this.props.first} {this.props.last}
       </div>
     );
   }

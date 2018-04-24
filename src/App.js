@@ -7,10 +7,12 @@ import NotFound from './NotFound.js';
 
 const routes = [
   {
-    path: '/hello',
+    path: '/hello/:first/:last',
     component: Hello,
-    props: { name: 'world' },
-    propFromPath: { id: null }  // value is used as default value if path doesn't contain one
+    propsFromPath: [
+      { prop: 'first', segment: ':first'},
+      { prop: 'last',   segment: ':last' }
+    ]
   }
 ]
 

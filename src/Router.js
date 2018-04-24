@@ -12,11 +12,15 @@ class Router extends Component {
   }
 
   handleNavigation = () => {
-    const path = this.getBrowserPath();
-    const route = this.getRouteForPath(path);
+    let browserPath = this.getBrowserPath();
+    browserPath = browserPath.split('/').slice(1);
+
+    let route = this.getRouteForPath(this.props.routes, browserPath);
+    if (!route) route = this.props.defaultRoute;
     if (!route) return;
-    const props = this.getPropsForRoute(route);
-    
+
+    const props = this.getPropsForRoute(route, browserPath);
+
     ReactDOM.render(
       React.createElement(route.component, props),
       document.getElementById('component')
@@ -24,34 +28,46 @@ class Router extends Component {
   }
 
   getBrowserPath = () => {
-    return window.location.hash.slice(1);
+    return window.location.hash;
   }
 
-  getRouteForPath = path => {
-    if (!path) path = '/';
-    const route = this.props.routes.find(route => path.startsWith(route.path));
+  getRouteForPath = (routes, browserPath) => {
 
-    return route ? route : this.props.defaultRoute;
-  }
+    const route = routes.find(route => {
+      const routePath = route.path.split('/').slice(1);
 
-  getPropsForRoute = route => {
-    if (route.propFromPath) {
-      const path = this.getBrowserPath();
-      let pathTail = path.slice(route.path.length + 1);
+      if (browserPath.length < routePath.length) return false;
 
-      if (pathTail.includes('/')) {
-        pathTail = pathTail.slice(0, pathTail.indexOf('/'));
+      let match = true;
+      let propIndex = 0;
+
+      for (let i = 0; i < routePath.length; ++i) {
+        if (routePath[i] !== browserPath[i]) {
+          if (routePath[i] !== route.propsFromPath[propIndex].segment) {
+            match = false;
+            break;
+          }
+          propIndex += 1;
+        }
       }
+      return match;
+    });
+
+    return route;
+  }
+
+  getPropsForRoute = (route, browserPath) => {
+    const props = route.props ? route.props : {};
+    const routePath = route.path.split('/').slice(1);
+
+    for (let element of route.propsFromPath) {
+      const position = routePath.indexOf(element.segment);
       
-      if (pathTail.length > 0) {
-        route.propFromPath[Object.keys(route.propFromPath)[0]] = pathTail;
-      }
-    }
+      if (position < 0) return;
 
-    return {
-      ...route.props,
-      ...route.propFromPath
+      props[element.prop] = browserPath[position];
     }
+    return props;
   }
 
   render() {
