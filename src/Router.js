@@ -13,11 +13,15 @@ class Router extends Component {
 
   handleNavigation = () => {
     let browserPath = this.getBrowserPath();
-    browserPath = browserPath.split('/').slice(1);
+    browserPath = browserPath.split('/').slice(1).filter(segment => segment);
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
     if (!route) return;
+
+    console.log(browserPath);
+    console.log(route.path);
+    
 
     const props = this.getPropsForRoute(route, browserPath);
 
@@ -72,7 +76,7 @@ class Router extends Component {
       }
 
     }
-    
+
     return props;
   }
 
