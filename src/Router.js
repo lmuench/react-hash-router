@@ -14,7 +14,7 @@ class Router extends Component {
 
   handleNavigation = () => {
     let browserPath = this.getBrowserPath();
-    browserPath = browserPath.split('/').slice(1).filter(segment => segment);  // TODO wrap in function?
+    browserPath = browserPath.split('/').slice(1);
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
@@ -34,15 +34,19 @@ class Router extends Component {
   getRouteForPath = (routes, browserPath) => {
 
     const route = routes.find(route => {
-      const routePath = route.path.split('/').slice(1);  // TODO wrap in function?
+      const routePath = route.path.split('/').slice(1);
 
-      if (browserPath.length < routePath.length) return false;  // TODO return null instead?
+      if (browserPath.length < routePath.length) return null;
 
       let match = true;
       let propIndex = 0;
 
       for (let i = 0; i < routePath.length; ++i) {
         if (routePath[i] !== browserPath[i]) {
+          if (!browserPath[i]) {
+            match = false;
+            break;
+          }
           if (routePath[i] !== route.propsFromPath[propIndex].segment) {
             match = false;
             break;
