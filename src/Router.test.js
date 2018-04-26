@@ -20,7 +20,7 @@ describe('getRouteForPath()', () => {
   }
 
   const browserPath = (
-    '#/hello/peter/piper'.split('/').slice(1).filter(segment => segment)
+    '#/hello/peter/piper'.split('/').slice(1)
   );
 
   it('should get the route for a given path', () => {
