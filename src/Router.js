@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 class Router extends Component {
   constructor() {
     super();
+    this.state = {};
     window.addEventListener('hashchange', this.handleNavigation, false);
   }
 
@@ -13,22 +14,17 @@ class Router extends Component {
 
   handleNavigation = () => {
     let browserPath = this.getBrowserPath();
-    browserPath = browserPath.split('/').slice(1).filter(segment => segment);
+    browserPath = browserPath.split('/').slice(1).filter(segment => segment);  // TODO wrap in function?
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
     if (!route) return;
 
-    console.log(browserPath);
-    console.log(route.path);
-    
-
     const props = this.getPropsForRoute(route, browserPath);
 
-    ReactDOM.render(
-      React.createElement(route.component, props),
-      document.getElementById('component')
-    );
+    this.setState({
+      component: React.createElement(route.component, props)
+    });
   }
 
   getBrowserPath = () => {
@@ -38,9 +34,9 @@ class Router extends Component {
   getRouteForPath = (routes, browserPath) => {
 
     const route = routes.find(route => {
-      const routePath = route.path.split('/').slice(1);
+      const routePath = route.path.split('/').slice(1);  // TODO wrap in function?
 
-      if (browserPath.length < routePath.length) return false;
+      if (browserPath.length < routePath.length) return false;  // TODO return null instead?
 
       let match = true;
       let propIndex = 0;
@@ -82,7 +78,7 @@ class Router extends Component {
 
   render() {
     return (
-      <div id="component" />
+      <div>{this.state.component}</div>
     );
   }
 }
