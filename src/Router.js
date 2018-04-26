@@ -56,11 +56,11 @@ class Router extends Component {
 
       for (let i = 0; i < routePath.length; ++i) {
         if (routePath[i] !== browserPath[i]) {
-          if (!browserPath[i]) {
-            match = false;
-            break;
-          }
-          if (routePath[i] !== route.propsFromPath[propIndex].segment) {
+          if (
+            !browserPath[i] ||
+            !route.propsFromPath[propIndex] ||
+            routePath[i] !== route.propsFromPath[propIndex].segment
+          ) {
             match = false;
             break;
           }
@@ -70,7 +70,7 @@ class Router extends Component {
       return match;
     });
 
-    return route;
+    return route ? route : null;
   }
 
   getPropsForRoute = (route, browserPath) => {
