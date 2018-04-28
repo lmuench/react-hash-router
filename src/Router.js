@@ -12,22 +12,17 @@ class Router extends Component {
     this.handleNavigation();
   }
 
-  extractSegments = path => {
-    path = this.removeQuery(path);
-    return path.split('/').slice(1);
-  }
-
-  removeQuery = path => {
-    const queryStart = path.indexOf('?');
-    if (queryStart >= 0) {
-      path = path.slice(0, queryStart);
-    }
-    return path;
+  extractSegmentsAndQueries = path => {
+    const pathAndQuery = path.split('?');
+    const segments = pathAndQuery[0].split('/').slice(1);
+    let queries = pathAndQuery[1] ? pathAndQuery[1].split('&') : [];
+    queries = queries.map(querie => querie.split('='));
+    return { segments, queries };
   }
 
   handleNavigation = () => {
     let browserPath = this.getBrowserPath();
-    browserPath = this.extractSegments(browserPath);
+    browserPath = this.extractSegmentsAndQueries(browserPath).segments;
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
@@ -47,7 +42,7 @@ class Router extends Component {
   getRouteForPath = (routes, browserPath) => {
 
     const route = routes.find(route => {
-      const routePath = this.extractSegments(route.path);
+      const routePath = this.extractSegmentsAndQueries(route.path).segments;
 
       if (browserPath.length < routePath.length) return null;
 
@@ -78,7 +73,7 @@ class Router extends Component {
 
     if (route.path) {
 
-      const routePath = this.extractSegments(route.path);
+      const routePath = this.extractSegmentsAndQueries(route.path).segments;
 
       for (let element of route.propsFromPath) {
         const position = routePath.indexOf(element.segment);

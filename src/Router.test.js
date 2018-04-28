@@ -30,22 +30,23 @@ describe('getRouteForPath()', () => {
     '#/hello/peter/piper',
     '#/hello/peter/piper/foo',
     '#/hello/peter/piper?foo=bar',
-    '#/hello/peter/piper/?foo=bar'
-  ].map(path => new Router().extractSegments(path));
+    '#/hello/peter/piper?foo=bar&bar=foo',
+    '#/hello/peter/piper/?foo=bar&bar=foo'
+  ].map(path => new Router().extractSegmentsAndQueries(path).segments);
 
   const correctBrowserPathsB = [
     '#/ticker/BTCUSDT/price',
     '#/ticker/BTCUSDT/price/',
     '#/ticker/BTCUSDT/price//',
     '#/ticker/BTCUSDT/price/change'
-  ].map(path => new Router().extractSegments(path));
+  ].map(path => new Router().extractSegmentsAndQueries(path).segments);
 
   const incorrectBrowserPathsA = [
     '#/hello/peter//piper',
     '#/hello/peter/',
     '#/hello/peter',
     '#/hello/'
-  ].map(path => new Router().extractSegments(path));
+  ].map(path => new Router().extractSegmentsAndQueries(path).segments);
 
   const incorrectBrowserPathsB = [
     '#/ticker/v2/BTCUSDT/price',
@@ -53,7 +54,7 @@ describe('getRouteForPath()', () => {
     '#/ticker/BTCUSDT/volume',
     '#/ticker/price/BTCUSDT',
     '#/ticker/price'
-  ].map(path => new Router().extractSegments(path));
+  ].map(path => new Router().extractSegmentsAndQueries(path).segments);
 
 
   it('should get the route for a given path', () => {
