@@ -1,7 +1,7 @@
 const utils = {};
 
 utils.getSegments = () => {
-  const path = utils.getBrowserPath();
+  const path = utils.getFragment();
   return utils.extractSegments(path);
 }
 
@@ -12,7 +12,7 @@ utils.extractSegments = path => {
 }
 
 utils.getQueries = () => {
-  const path = utils.getBrowserPath();
+  const path = utils.getFragment();
   return utils.extractQueries(path);
 }
 
@@ -23,7 +23,7 @@ utils.extractQueries = path => {
   return queries;
 }
 
-utils.getBrowserPath = () => {
+utils.getFragment = () => {
   return window.location.hash;
 }
 

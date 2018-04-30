@@ -48,7 +48,7 @@ describe('getRouteForPath()', () => {
     '#/hello/peter',
     '#/hello/',
     '#/',
-    '#',
+    '#hello/peter/piper/foo',
   ].map(path => utils.extractSegments(path));
 
   const incorrectBrowserPathsB = [
@@ -65,7 +65,7 @@ describe('getRouteForPath()', () => {
 
     correctBrowserPathsA.forEach(browserPath => {
       const route = router.getRouteForPath(routes, browserPath);
-      route.should.deepEqual(routes[0]);  
+      route.should.deepEqual(routes[0]);
     });
     
     correctBrowserPathsB.forEach(browserPath => {

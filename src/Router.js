@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import utils from './RouterUtils';
 
 class Router extends Component {
@@ -14,36 +13,35 @@ class Router extends Component {
   }
 
   handleNavigation = () => {
-    let browserPath = utils.getBrowserPath();
-    browserPath = utils.extractSegments(browserPath);
+    const segments = utils.getSegments();
 
-    let route = this.getRouteForPath(this.props.routes, browserPath);
+    let route = this.getRouteForPath(this.props.routes, segments);
     if (!route) route = this.props.defaultRoute;
     if (!route) return;
 
-    const props = this.getPropsForRoute(route, browserPath);
+    const props = this.getPropsForRoute(route, segments);
 
     this.setState({
       component: React.createElement(route.component, props)
     });
   }
 
-  getRouteForPath = (routes, browserPath) => {
+  getRouteForPath = (routes, segments) => {
 
     const route = routes.find(route => {
-      const routePath = utils.extractSegments(route.path);
+      const routePathSegments = utils.extractSegments(route.path);
 
-      if (browserPath.length < routePath.length) return null;
+      if (segments.length < routePathSegments.length) return null;
 
       let match = true;
       let propIndex = 0;
 
-      for (let i = 0; i < routePath.length; ++i) {
-        if (routePath[i] !== browserPath[i]) {
+      for (let i = 0; i < routePathSegments.length; ++i) {
+        if (routePathSegments[i] !== segments[i]) {
           if (
-            !browserPath[i] ||
+            !segments[i] ||
             !route.propsFromPath[propIndex] ||
-            routePath[i] !== route.propsFromPath[propIndex].segment
+            routePathSegments[i] !== route.propsFromPath[propIndex].segment
           ) {
             match = false;
             break;
@@ -57,19 +55,19 @@ class Router extends Component {
     return route ? route : null;
   }
 
-  getPropsForRoute = (route, browserPath) => {
+  getPropsForRoute = (route, segments) => {
     const props = route.props ? route.props : {};
 
     if (route.path) {
 
-      const routePath = utils.extractSegments(route.path);
+      const routePathSegments = utils.extractSegments(route.path);
 
       for (let element of route.propsFromPath) {
-        const position = routePath.indexOf(element.segment);
+        const position = routePathSegments.indexOf(element.segment);
 
         if (position < 0) return;
 
-        props[element.prop] = browserPath[position];
+        props[element.prop] = segments[position];
       }
 
     }
