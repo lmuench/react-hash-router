@@ -26,6 +26,21 @@ class Router extends Component {
     });
   }
 
+  /**
+   * @param {array} routes - array of routes
+   * @param {array} segments - path segments
+   * @return {Object} route
+   * @example route
+   * {
+   *   path: '/hello/:first/:last',
+   *   component: Hello,
+   *   props: [{ foo: 'bar' }],
+   *   propsFromPath: [
+   *     { prop: 'first', segment: ':first'},
+   *     { prop: 'last',  segment: ':last' }
+   *   ]
+   * }
+   */
   getRouteForPath = (routes, segments) => {
 
     const route = routes.find(route => {
@@ -55,6 +70,17 @@ class Router extends Component {
     return route ? route : null;
   }
 
+  /**
+   * @param {Object} route - route
+   * @param {array} segments - path segments
+   * @return {array} props
+   * @example props
+   * [
+   *   { foo: 'bar' },
+   *   { first: 'peter'},
+   *   { last:, 'piper' }
+   * ]
+   */
   getPropsForRoute = (route, segments) => {
     const props = route.props ? route.props : {};
 
