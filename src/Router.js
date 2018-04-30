@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import utils from './RouterUtils';
 
 class Router extends Component {
   constructor() {
@@ -12,17 +13,9 @@ class Router extends Component {
     this.handleNavigation();
   }
 
-  extractSegmentsAndQueries = path => {
-    const pathAndQuery = path.split('?');
-    const segments = pathAndQuery[0].split('/').slice(1);
-    let queries = pathAndQuery[1] ? pathAndQuery[1].split('&') : [];
-    queries = queries.map(querie => querie.split('='));
-    return { segments, queries };
-  }
-
   handleNavigation = () => {
-    let browserPath = this.getBrowserPath();
-    browserPath = this.extractSegmentsAndQueries(browserPath).segments;
+    let browserPath = utils.getBrowserPath();
+    browserPath = utils.extractSegmentsAndQueries(browserPath).segments;
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
@@ -35,14 +28,10 @@ class Router extends Component {
     });
   }
 
-  getBrowserPath = () => {
-    return window.location.hash;
-  }
-
   getRouteForPath = (routes, browserPath) => {
 
     const route = routes.find(route => {
-      const routePath = this.extractSegmentsAndQueries(route.path).segments;
+      const routePath = utils.extractSegmentsAndQueries(route.path).segments;
 
       if (browserPath.length < routePath.length) return null;
 
@@ -73,7 +62,7 @@ class Router extends Component {
 
     if (route.path) {
 
-      const routePath = this.extractSegmentsAndQueries(route.path).segments;
+      const routePath = utils.extractSegmentsAndQueries(route.path).segments;
 
       for (let element of route.propsFromPath) {
         const position = routePath.indexOf(element.segment);
