@@ -15,7 +15,7 @@ class Router extends Component {
 
   handleNavigation = () => {
     let browserPath = utils.getBrowserPath();
-    browserPath = utils.extractSegmentsAndQueries(browserPath).segments;
+    browserPath = utils.extractSegments(browserPath);
 
     let route = this.getRouteForPath(this.props.routes, browserPath);
     if (!route) route = this.props.defaultRoute;
@@ -31,7 +31,7 @@ class Router extends Component {
   getRouteForPath = (routes, browserPath) => {
 
     const route = routes.find(route => {
-      const routePath = utils.extractSegmentsAndQueries(route.path).segments;
+      const routePath = utils.extractSegments(route.path);
 
       if (browserPath.length < routePath.length) return null;
 
@@ -62,7 +62,7 @@ class Router extends Component {
 
     if (route.path) {
 
-      const routePath = utils.extractSegmentsAndQueries(route.path).segments;
+      const routePath = utils.extractSegments(route.path);
 
       for (let element of route.propsFromPath) {
         const position = routePath.indexOf(element.segment);

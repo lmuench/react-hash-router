@@ -33,21 +33,23 @@ describe('getRouteForPath()', () => {
     '#/hello/peter/piper?foo=bar',
     '#/hello/peter/piper?foo=bar&bar=foo',
     '#/hello/peter/piper/?foo=bar&bar=foo'
-  ].map(path => utils.extractSegmentsAndQueries(path).segments);
+  ].map(path => utils.extractSegments(path));
 
   const correctBrowserPathsB = [
     '#/ticker/BTCUSDT/price',
     '#/ticker/BTCUSDT/price/',
     '#/ticker/BTCUSDT/price//',
     '#/ticker/BTCUSDT/price/change'
-  ].map(path => utils.extractSegmentsAndQueries(path).segments);
+  ].map(path => utils.extractSegments(path));
 
   const incorrectBrowserPathsA = [
     '#/hello/peter//piper',
     '#/hello/peter/',
     '#/hello/peter',
-    '#/hello/'
-  ].map(path => utils.extractSegmentsAndQueries(path).segments);
+    '#/hello/',
+    '#/',
+    '#',
+  ].map(path => utils.extractSegments(path));
 
   const incorrectBrowserPathsB = [
     '#/ticker/v2/BTCUSDT/price',
@@ -55,7 +57,7 @@ describe('getRouteForPath()', () => {
     '#/ticker/BTCUSDT/volume',
     '#/ticker/price/BTCUSDT',
     '#/ticker/price'
-  ].map(path => utils.extractSegmentsAndQueries(path).segments);
+  ].map(path => utils.extractSegments(path));
 
 
   it('should get the route for a given path', () => {
