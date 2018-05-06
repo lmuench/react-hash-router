@@ -17,9 +17,12 @@ const limitLength = str => {
   return str.slice(0, 20);
 }
 
+const userIsLoggedIn = () => true;
+
 const routes = [{
   path: '/hello/:first/:last',
   component: Hello,
+  guard: userIsLoggedIn(),
   propsFromPath: [{
       prop: 'first',
       segment: ':first',

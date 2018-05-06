@@ -46,7 +46,9 @@ class Router extends Component {
     const route = routes.find(route => {
       const routePathSegments = utils.extractSegments(route.path);
 
-      if (segments.length < routePathSegments.length) return null;
+      if (route.guard === false) return false;
+
+      if (segments.length < routePathSegments.length) return false;
 
       let match = true;
       let propIndex = 0;
