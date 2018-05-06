@@ -11,7 +11,7 @@ const routes = [
     component: Hello,
     propsFromPath: [
       { prop: 'first', segment: ':first'},
-      { prop: 'last',   segment: ':last' }
+      { prop: 'last',  segment: ':last' }
     ]
   }
 ]
