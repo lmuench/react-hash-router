@@ -5,16 +5,31 @@ import Router from './Router.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
 
-const routes = [
-  {
-    path: '/hello/:first/:last',
-    component: Hello,
-    propsFromPath: [
-      { prop: 'first', segment: ':first'},
-      { prop: 'last',  segment: ':last' }
-    ]
-  }
-]
+const abbreviate = str => {
+  return str.charAt(0) + '.';
+}
+
+const capitalize = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+const limitLength = str => {
+  return str.slice(0, 20);
+}
+
+const routes = [{
+  path: '/hello/:first/:last',
+  component: Hello,
+  propsFromPath: [{
+      prop: 'first',
+      segment: ':first',
+      plugs: [limitLength, abbreviate, capitalize]
+    }, {
+      prop: 'last',
+      segment: ':last',
+      plugs: [limitLength, capitalize]
+    }]
+}]
 
 const defaultRoute = {
   component: NotFound

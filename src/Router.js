@@ -93,7 +93,13 @@ class Router extends Component {
 
         if (position < 0) return;
 
-        props[element.prop] = segments[position];
+        let segment = segments[position];
+
+        for (let plug of element.plugs) {
+          segment = plug(segment);
+        }
+
+        props[element.prop] = segment;
       }
 
     }
