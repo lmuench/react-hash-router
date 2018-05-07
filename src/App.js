@@ -22,7 +22,7 @@ const userIsLoggedIn = () => true;
 const routes = [{
   path: '/hello/:first/:last',
   component: Hello,
-  guard: userIsLoggedIn(),
+  guards: [userIsLoggedIn],
   propsFromPath: [{
       prop: 'first',
       segment: ':first',

@@ -46,7 +46,11 @@ class Router extends Component {
     const route = routes.find(route => {
       const routePathSegments = utils.extractSegments(route.path);
 
-      if (route.guard === false) return false;
+      if (route.guards) {
+        for (let guard of route.guards) {
+          if (guard() !== true) return false;
+        }
+      }
 
       if (segments.length < routePathSegments.length) return false;
 
@@ -97,10 +101,12 @@ class Router extends Component {
 
         let segment = segments[position];
 
-        for (let plug of element.plugs) {
-          segment = plug(segment);
+        if (element.plugs) {
+          for (let plug of element.plugs) {
+            segment = plug(segment);
+          }
         }
-
+        
         props[element.prop] = segment;
       }
 
