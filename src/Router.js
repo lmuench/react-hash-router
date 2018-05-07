@@ -34,11 +34,16 @@ class Router extends Component {
    * {
    *   path: '/hello/:first/:last',
    *   component: Hello,
+   *   guards: [fooGuard, barGuard]
    *   props: [{ foo: 'bar' }],
-   *   propsFromPath: [
-   *     { prop: 'first', segment: ':first'},
-   *     { prop: 'last',  segment: ':last' }
-   *   ]
+   *   propsFromPath: [{
+   *     prop: 'first',
+   *     segment: ':first',
+   *     plugs: [fooPlug, barPlug]
+   *   }, {
+   *     prop: 'last',
+   *     segment: ':last'
+   *   }]
    * }
    */
   getRouteForPath = (routes, segments) => {
