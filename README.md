@@ -1,19 +1,19 @@
 ```jsx
 <Router routes={routes} defaultRoute={defaultRoute} />
 ```
-Display a route's component if the route's path matches the current URL's fragment (excluding `#`).
+Display a route's component if the route's path matches the current URL's fragment (excluding `#`)
 
-A route's path `/foo/bar` will match a URL `myurl.com/#/foo/bar`.
+A route's path `/foo/bar` will match a URL `myurl.com/#/foo/bar`
 
 #### routes
 Type: `array`
 
-An array of routes.
+An array of routes
 
 #### defaultRoute
 Type: `route`
 
-An optional default route to be used, when no route's path matches the current URL.
+An optional default route to be used, when no route's path matches the current URL
 
 
 
@@ -66,4 +66,4 @@ A string that equals exactly one segment of the route's path
 #### plugs
 Type: `array`
 
-An array of pure functions taking the prop value as their only argument and returning a string.
+An array of pure functions taking the prop value as their only argument and returning a string
