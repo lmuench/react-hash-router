@@ -1,3 +1,5 @@
+# Router react component
+
 ```jsx
 <Router routes={routes} defaultRoute={defaultRoute} />
 ```
