@@ -34,7 +34,7 @@ class Router extends Component {
    * {
    *   path: '/hello/:first/:last',
    *   component: Hello,
-   *   guards: [fooGuard, barGuard]
+   *   guards: [fooGuard, barGuard],
    *   props: [{ foo: 'bar' }],
    *   propsFromPath: [{
    *     prop: 'first',
