@@ -1,12 +1,12 @@
 # Router react component
 
-### installation
-1. Copy the `src/router` folder into a react project
-2. `import Router from './router/Router.js'`
-
-**Note:** `RouterUtils.js` needs to be in the same folder as `Router.js`.
-
 ### usage
+1. Copy the `src/router` folder and place it somewhere in your react project
+2. Import the Router component using `import Router from './router/Router.js'`
+3. Define route objects matching URL fragments with react components
+3. Place a Router where the components shall be rendered and pass your routes as props
+
+### Router react component
 ```jsx
 <Router routes={routes} defaultRoute={defaultRoute} />
 ```
