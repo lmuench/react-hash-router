@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Router from './Router.js';
+import Router from './router/Router.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
 
