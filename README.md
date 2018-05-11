@@ -94,7 +94,7 @@ A string that equals exactly one segment of the route's path
 #### plugs
 Type: `array`
 
-An array of pure functions taking the prop value as their only argument and returning a string
+An array of pure functions (one argument, one return value) intended for modifying the prop value
 
 ## example react component with router
 
