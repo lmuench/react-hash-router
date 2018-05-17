@@ -52,7 +52,7 @@ class Router extends Component {
       const routePathSegments = utils.extractSegments(route.path);
 
       if (route.guards) {
-        for (let guard of route.guards) {
+        for (const guard of route.guards) {
           if (guard() !== true) return false;
         }
       }
@@ -99,7 +99,7 @@ class Router extends Component {
 
       const routePathSegments = utils.extractSegments(route.path);
 
-      for (let element of route.propsFromPath) {
+      for (const element of route.propsFromPath) {
         const position = routePathSegments.indexOf(element.segment);
 
         if (position < 0) return;
@@ -107,7 +107,7 @@ class Router extends Component {
         let segment = segments[position];
 
         if (element.plugs) {
-          for (let plug of element.plugs) {
+          for (const plug of element.plugs) {
             segment = plug(segment);
           }
         }
