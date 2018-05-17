@@ -4,6 +4,7 @@ import './App.css';
 import Router from './router/Router.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
+import Link from './router/Link';
 
 const abbreviate = str => {
   return str.charAt(0) + '.';
@@ -47,7 +48,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        
         <Router routes={routes} defaultRoute={defaultRoute} />
+
+        <Link path={'/hello/foo/bar'}>
+          <button>Click me!</button>
+        </Link>
+
       </div>
     );
   }
