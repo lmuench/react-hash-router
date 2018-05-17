@@ -8,7 +8,7 @@ class Link extends Component {
 
   render() {
     return (
-      <div onClick={this.handleClick}>
+      <div onClick={this.handleClick} style={this.props.style}>
         {this.props.children}
       </div>
     );

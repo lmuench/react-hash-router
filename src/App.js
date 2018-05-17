@@ -51,10 +51,14 @@ class App extends Component {
         
         <Router routes={routes} defaultRoute={defaultRoute} />
 
-        <Link path={'/hello/foo/bar'}>
-          <button>Click me!</button>
+        <Link path={'/hello/foo/bar'} style={{ padding: '4px' }}>
+          <button>I am Foo Bar</button>
         </Link>
 
+        <Link path={'/hello/bar/foo'} style={{ padding: '4px' }}>
+          <button>I am Bar Foo</button>
+        </Link>
+        
       </div>
     );
   }
