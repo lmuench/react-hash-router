@@ -127,9 +127,9 @@ Type: `array`
 An array of pure functions (one argument, one return value) intended for modifying the prop value
 
 ## demo
-Start with `npm start`
-
 Sources in `src/demo`
+
+Start with `npm start`
 
 ```jsx
 import React, { Component } from 'react';
