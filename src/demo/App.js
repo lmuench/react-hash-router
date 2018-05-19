@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LightRouter from './router/LightRouter.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
-import LightLink from './router/LightLink';
+import { LightRouter, LightLink } from '../lib';
 
 const abbreviate = str => {
   return str.charAt(0) + '.';
