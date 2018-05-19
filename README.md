@@ -1,7 +1,5 @@
 # react-light-router
 
-### getting started
-
 #### install
 `npm install --save react-light-router`
 
