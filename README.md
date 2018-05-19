@@ -18,6 +18,8 @@ Clicking on a LightLink with a path prop `/foo/bar` will replace the browser's U
 
 E.g. `example.com` will become `example.com/#/foo/bar` without a page-reload. The LightRouter component will consequently render a React component which matches this hash-based path.
 
+### props
+
 #### path
 Type: `string`
 
@@ -31,6 +33,8 @@ A hash-based path which the component links to.
 Display a route's component if the route's path matches the current URL's fragment (excluding `#`)
 
 A route's path `/foo/bar` will match `example.com/#/foo/bar`
+
+### props
 
 #### routes
 Type: `array`
