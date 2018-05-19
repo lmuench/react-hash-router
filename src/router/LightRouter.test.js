@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from './Router.js';
-import utils from './RouterUtils';
+import LightRouter from './LightRouter.js';
+import LightPath from './LightPath';
 import should from 'should';
 
 describe('getRouteForPath()', () => {
@@ -33,14 +33,14 @@ describe('getRouteForPath()', () => {
     '#/hello/peter/piper?foo=bar',
     '#/hello/peter/piper?foo=bar&bar=foo',
     '#/hello/peter/piper/?foo=bar&bar=foo'
-  ].map(path => utils.extractSegments(path));
+  ].map(path => LightPath.extractSegments(path));
 
   const correctBrowserPathsB = [
     '#/ticker/BTCUSDT/price',
     '#/ticker/BTCUSDT/price/',
     '#/ticker/BTCUSDT/price//',
     '#/ticker/BTCUSDT/price/change'
-  ].map(path => utils.extractSegments(path));
+  ].map(path => LightPath.extractSegments(path));
 
   const incorrectBrowserPathsA = [
     '#/hello/peter//piper',
@@ -49,7 +49,7 @@ describe('getRouteForPath()', () => {
     '#/hello/',
     '#/',
     '#hello/peter/piper/foo',
-  ].map(path => utils.extractSegments(path));
+  ].map(path => LightPath.extractSegments(path));
 
   const incorrectBrowserPathsB = [
     '#/ticker/v2/BTCUSDT/price',
@@ -57,11 +57,11 @@ describe('getRouteForPath()', () => {
     '#/ticker/BTCUSDT/volume',
     '#/ticker/price/BTCUSDT',
     '#/ticker/price'
-  ].map(path => utils.extractSegments(path));
+  ].map(path => LightPath.extractSegments(path));
 
 
   it('should get the route for a given path', () => {
-    const router = new Router();
+    const router = new LightRouter();
 
     correctBrowserPathsA.forEach(browserPath => {
       const route = router.getRouteForPath(routes, browserPath);
@@ -75,7 +75,7 @@ describe('getRouteForPath()', () => {
   });
 
   it('should not return any route for an incorrect path', () => {
-    const router = new Router();
+    const router = new LightRouter();
 
     incorrectBrowserPathsA.forEach(browserPath => {
       const route = router.getRouteForPath(routes, browserPath);

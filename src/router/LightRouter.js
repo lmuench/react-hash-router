@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import utils from './RouterUtils';
+import LightPath from './LightPath';
 
-class Router extends Component {
+class LightRouter extends Component {
   constructor() {
     super();
     this.state = {};
@@ -13,7 +13,7 @@ class Router extends Component {
   }
 
   handleNavigation = () => {
-    const segments = utils.getSegments();
+    const segments = LightPath.getSegments();
 
     let route = this.getRouteForPath(this.props.routes, segments);
     if (!route) route = this.props.defaultRoute;
@@ -49,7 +49,7 @@ class Router extends Component {
   getRouteForPath = (routes, segments) => {
 
     const route = routes.find(route => {
-      const routePathSegments = utils.extractSegments(route.path);
+      const routePathSegments = LightPath.extractSegments(route.path);
 
       if (route.guards) {
         for (const guard of route.guards) {
@@ -97,7 +97,7 @@ class Router extends Component {
 
     if (route.path) {
 
-      const routePathSegments = utils.extractSegments(route.path);
+      const routePathSegments = LightPath.extractSegments(route.path);
 
       for (const element of route.propsFromPath) {
         const position = routePathSegments.indexOf(element.segment);
@@ -127,4 +127,4 @@ class Router extends Component {
   }
 }
 
-export default Router;
+export default LightRouter;

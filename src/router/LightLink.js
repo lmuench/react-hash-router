@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Link extends Component {
+class LightLink extends Component {
 
   handleClick = () => {
     window.location.hash = '#' + this.props.path;
@@ -15,4 +15,4 @@ class Link extends Component {
   }
 }
 
-export default Link;
+export default LightLink;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Router from './router/Router.js';
+import LightRouter from './router/LightRouter.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
-import Link from './router/Link';
+import LightLink from './router/LightLink';
 
 const abbreviate = str => {
   return str.charAt(0) + '.';
@@ -49,15 +49,15 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         
-        <Router routes={routes} defaultRoute={defaultRoute} />
+        <LightRouter routes={routes} defaultRoute={defaultRoute} />
 
-        <Link path={'/hello/foo/bar'} style={{ padding: '4px' }}>
+        <LightLink path={'/hello/foo/bar'} style={{ padding: '4px' }}>
           <button>I am Foo Bar</button>
-        </Link>
+        </LightLink>
 
-        <Link path={'/hello/bar/foo'} style={{ padding: '4px' }}>
+        <LightLink path={'/hello/bar/foo'} style={{ padding: '4px' }}>
           <button>I am Bar Foo</button>
-        </Link>
+        </LightLink>
         
       </div>
     );
