@@ -1,14 +1,14 @@
-# Router react component
+# LightRouter react component
 
 ### usage
 1. Copy the `src/router` folder and place it somewhere in your react project
-2. Import the Router component using `import Router from './router/Router.js'`
+2. Import the Router component using `import LightRouter from './router/LightRouter.js'`
 3. Define route objects matching URL fragments with react components
 3. Place a Router where the components shall be rendered and pass your routes as props
 
-### Router react component
+### LightRouter react component
 ```jsx
-<Router routes={routes} defaultRoute={defaultRoute} />
+<LightRouter routes={routes} defaultRoute={defaultRoute} />
 ```
 Display a route's component if the route's path matches the current URL's fragment (excluding `#`)
 
@@ -103,15 +103,16 @@ Type: `array`
 
 An array of pure functions (one argument, one return value) intended for modifying the prop value
 
-## example react component with router
+## example react component with react-light-router
 
 ```jsx
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Router from './router/Router.js';
+import LightRouter from './router/LightRouter.js';
 import Hello from './Hello.js';
 import NotFound from './NotFound.js';
+import LightLink from './router/LightLink';
 
 const abbreviate = str => {
   return str.charAt(0) + '.';
@@ -155,7 +156,17 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Router routes={routes} defaultRoute={defaultRoute} />
+        
+        <LightRouter routes={routes} defaultRoute={defaultRoute} />
+
+        <LightLink path={'/hello/foo/bar'} style={{ padding: '4px' }}>
+          <button>I am Foo Bar</button>
+        </LightLink>
+
+        <LightLink path={'/hello/bar/foo'} style={{ padding: '4px' }}>
+          <button>I am Bar Foo</button>
+        </LightLink>
+        
       </div>
     );
   }
