@@ -6,13 +6,31 @@
 #### import
 `import { LightRouter, LightLink } from 'react-light-router'`
 
-### LightRouter React component
+### LightLink
+```jsx
+<LightLink path={'/foo/bar'}>
+  <button>Click me!</button>
+</LightLink>
+```
+Turns the child component (or any content between its opening and closing tag) into a clickable hash-based link.
+
+Clicking on a LightLink with a path prop `/foo/bar` will replace the browser's URL fragment with `#/foo/bar`.
+
+So, for example `example.com` will become `example.com/#/foo/bar` without a page-reload.
+
+#### path
+Type: `string`
+
+A hash-based path which the component links to.
+
+
+### LightRouter
 ```jsx
 <LightRouter routes={routes} defaultRoute={defaultRoute} />
 ```
 Display a route's component if the route's path matches the current URL's fragment (excluding `#`)
 
-A route's path `/foo/bar` will match a URL `myurl.com/#/foo/bar`
+A route's path `/foo/bar` will match `example.com/#/foo/bar`
 
 #### routes
 Type: `array`
