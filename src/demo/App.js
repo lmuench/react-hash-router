@@ -44,7 +44,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">react-light-router</h1>
+          <h1 className="App-title">React Light Router</h1>
+          <img src={logo} className="App-logo" alt="logo" />
         </header>
 
         <LightRouter routes={routes} defaultRoute={defaultRoute} style={{ padding: '16px' }} />
