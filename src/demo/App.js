@@ -44,11 +44,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">react-light-router</h1>
         </header>
-        
-        <LightRouter routes={routes} defaultRoute={defaultRoute} />
+
+        <LightRouter routes={routes} defaultRoute={defaultRoute} style={{ padding: '16px' }} />
 
         <LightLink path={'/hello/foo/bar'} style={{ padding: '4px' }}>
           <button>I am Foo Bar</button>

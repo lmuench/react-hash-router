@@ -122,7 +122,9 @@ class LightRouter extends Component {
 
   render() {
     return (
-      <div>{this.state.component}</div>
+      <div style={this.props.style}>
+        {this.state.component}
+      </div>
     );
   }
 }
