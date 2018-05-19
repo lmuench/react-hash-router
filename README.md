@@ -1,5 +1,13 @@
 # react-light-router
 
+### getting started
+
+#### install
+`npm install --save react-light-router`
+
+#### import
+`import { LightRouter, LightLink } from 'react-light-router'`
+
 ### LightRouter React component
 ```jsx
 <LightRouter routes={routes} defaultRoute={defaultRoute} />
