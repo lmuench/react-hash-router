@@ -1,4 +1,4 @@
-# LightRouter react component
+# react-light-router
 
 ### usage
 1. Copy the `src/router` folder and place it somewhere in your react project
