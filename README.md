@@ -5,7 +5,9 @@ Sources in `src/lib`
 `npm install --save react-light-router`
 
 #### import
-`import { LightLink, LightRouter } from 'react-light-router'`
+```jsx
+import { LightLink, LightRouter } from 'react-light-router'
+```
 
 ## LightLink
 ```jsx
@@ -198,4 +200,34 @@ class App extends Component {
 }
 
 export default App;
+```
+
+## LightUrl
+```jsx
+import { LightUrl } from 'react-light-router'
+```
+Provides access to the hash-based path and query
+
+### methods
+
+#### LightUrl.getSegments()
+Return Type: `array`
+
+Returns the hash-based path segments of the browser's current URL
+
+`example.com/#/foo/bar`
+
+```jsx
+['foo', 'bar']
+```
+
+#### LightUrl.getQueries()
+Return Type: `array`
+
+Returns the hash-based queries of the browser's current URL
+
+`example.com/#/foo/bar?filter=unread&sort=new`
+
+```jsx
+[['filter', 'unread'], ['sort', 'new']]
 ```
