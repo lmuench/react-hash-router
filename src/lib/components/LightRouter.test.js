@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LightRouter from './LightRouter.js';
-import LightPath from './LightPath';
+import LightUrl from './LightUrl';
 import should from 'should';
 
 describe('getRouteForPath()', () => {
@@ -33,14 +33,14 @@ describe('getRouteForPath()', () => {
     '#/hello/peter/piper?foo=bar',
     '#/hello/peter/piper?foo=bar&bar=foo',
     '#/hello/peter/piper/?foo=bar&bar=foo'
-  ].map(path => LightPath.extractSegments(path));
+  ].map(path => LightUrl.extractSegments(path));
 
   const correctBrowserPathsB = [
     '#/ticker/BTCUSDT/price',
     '#/ticker/BTCUSDT/price/',
     '#/ticker/BTCUSDT/price//',
     '#/ticker/BTCUSDT/price/change'
-  ].map(path => LightPath.extractSegments(path));
+  ].map(path => LightUrl.extractSegments(path));
 
   const incorrectBrowserPathsA = [
     '#/hello/peter//piper',
@@ -49,7 +49,7 @@ describe('getRouteForPath()', () => {
     '#/hello/',
     '#/',
     '#hello/peter/piper/foo',
-  ].map(path => LightPath.extractSegments(path));
+  ].map(path => LightUrl.extractSegments(path));
 
   const incorrectBrowserPathsB = [
     '#/ticker/v2/BTCUSDT/price',
@@ -57,7 +57,7 @@ describe('getRouteForPath()', () => {
     '#/ticker/BTCUSDT/volume',
     '#/ticker/price/BTCUSDT',
     '#/ticker/price'
-  ].map(path => LightPath.extractSegments(path));
+  ].map(path => LightUrl.extractSegments(path));
 
 
   it('should get the route for a given path', () => {

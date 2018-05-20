@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LightPath from './LightPath';
+import LightUrl from './LightUrl';
 
 class LightRouter extends Component {
   constructor() {
@@ -13,7 +13,7 @@ class LightRouter extends Component {
   }
 
   handleNavigation = () => {
-    const segments = LightPath.getSegments();
+    const segments = LightUrl.getSegments();
 
     let route = this.getRouteForPath(this.props.routes, segments);
     if (!route) route = this.props.defaultRoute;
@@ -49,7 +49,7 @@ class LightRouter extends Component {
   getRouteForPath = (routes, segments) => {
 
     const route = routes.find(route => {
-      const routePathSegments = LightPath.extractSegments(route.path);
+      const routePathSegments = LightUrl.extractSegments(route.path);
 
       if (route.guards) {
         for (const guard of route.guards) {
@@ -97,7 +97,7 @@ class LightRouter extends Component {
 
     if (route.path) {
 
-      const routePathSegments = LightPath.extractSegments(route.path);
+      const routePathSegments = LightUrl.extractSegments(route.path);
 
       for (const element of route.propsFromPath) {
         const position = routePathSegments.indexOf(element.segment);
