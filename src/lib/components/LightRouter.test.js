@@ -88,3 +88,70 @@ describe('getRouteForPath()', () => {
     });
   });
 });
+
+describe('getPropsForRoute()', () => {
+  it('should get props from the path', () => {
+    const router = new LightRouter();
+    
+    let route = {
+      path: '/hello/:first/:last',
+      propsFromPath: [
+        { prop: 'first', segment: ':first' },
+        { prop: 'last', segment: ':last' }
+      ]
+    }
+    let segments = ['hello', 'peter', 'piper'];
+    let expected = { first: 'peter', last: 'piper' };
+    let props = router.getPropsForRoute(route, segments);
+    props.should.deepEqual(expected);
+
+    route = {
+      path: '/foo/bar/:first/:last',
+      propsFromPath: [
+        { prop: 'first', segment: ':first' },
+        { prop: 'last', segment: ':last' }
+      ]
+    }
+    segments = ['foo', 'bar', 'peter', 'piper'];
+    expected = { first: 'peter', last: 'piper' };
+    props = router.getPropsForRoute(route, segments);
+    props.should.deepEqual(expected);
+
+    route = {
+      path: '/foo/:first/bar/:last',
+      propsFromPath: [
+        { prop: 'first', segment: ':first' },
+        { prop: 'last', segment: ':last' }
+      ]
+    }
+    segments = ['foo', 'peter', 'bar', 'piper'];
+    expected = { first: 'peter', last: 'piper' };
+    props = router.getPropsForRoute(route, segments);
+    props.should.deepEqual(expected);
+
+    route = {
+      path: '/:first/foo/bar/:last',
+      propsFromPath: [
+        { prop: 'first', segment: ':first' },
+        { prop: 'last', segment: ':last' }
+      ]
+    }
+    segments = ['peter', 'foo', 'bar', 'piper'];
+    expected = { first: 'peter', last: 'piper' };
+    props = router.getPropsForRoute(route, segments);
+
+    props.should.deepEqual(expected);
+    route = {
+      path: '/:last/:first',
+      propsFromPath: [
+        { prop: 'first', segment: ':first' },
+        { prop: 'last', segment: ':last' }
+      ]
+    }
+    segments = ['piper', 'peter'];
+    expected = { first: 'peter', last: 'piper' };
+    props = router.getPropsForRoute(route, segments);
+    props.should.deepEqual(expected);
+
+  });
+});
