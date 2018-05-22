@@ -42,6 +42,8 @@ const routes = [{
   },{
     prop: 'message',
     query: 'message',
+    plugs: [capitalize],
+    effects: [query => console.log(`message = ${query}`)]
   }]
 }]
 

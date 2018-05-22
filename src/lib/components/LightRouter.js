@@ -150,23 +150,39 @@ class LightRouter extends Component {
         
         if (query[0] === propFromQuery.query) {
           
+          let prop = '';
+
           if (propFromQuery.convert) {
-            
+
             if (query[1] === 'true') {
-              props[propFromQuery.prop] = true;
+              prop = true;
             } else if (query[1] === 'false') {
-              props[propFromQuery.prop] = false;
+              prop = false;
             } else if (isNaN(query[1])) {
-              props[propFromQuery.prop] = query[1];
+              prop = query[1];
             } else {
-              props[propFromQuery.prop] = +query[1];  // converts string into a number
+              prop = +query[1];  // converts string into a number
             }
 
           } else {
             
-            props[propFromQuery.prop] = query[1];
+            prop = query[1];
 
           }
+
+          if (propFromQuery.plugs) {
+            for (const plug of propFromQuery.plugs) {
+              prop = plug(prop);
+            }
+          }
+
+          if (propFromQuery.effects) {
+            for (const effect of propFromQuery.effects) {
+              effect(prop);
+            }
+          }
+
+          props[propFromQuery.prop] = prop;
 
         }
         
