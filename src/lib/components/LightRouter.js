@@ -19,6 +19,12 @@ class LightRouter extends Component {
     if (!route) route = this.props.defaultRoute;
     if (!route) return;
 
+    if (route.effects) {
+      for (const effect of route.effects) {
+        effect();
+      }
+    }
+
     const props = this.getPropsForRoute(route, segments);
 
     this.setState({
@@ -109,6 +115,12 @@ class LightRouter extends Component {
         if (element.plugs) {
           for (const plug of element.plugs) {
             segment = plug(segment);
+          }
+        }
+
+        if (element.effects) {
+          for (const effect of element.effects) {
+            effect(segment);
           }
         }
         

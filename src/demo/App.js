@@ -23,14 +23,17 @@ const routes = [{
   path: '/hello/:first/:last',
   component: Hello,
   guards: [userIsLoggedIn],
+  effects: [() => console.log('GET /hello/:first/:last')],
   propsFromPath: [{
       prop: 'first',
       segment: ':first',
-      plugs: [limitLength, abbreviate, capitalize]
+      plugs: [limitLength, abbreviate, capitalize],
+      effects: [segment => console.log(`:first = ${segment}`)]
     }, {
       prop: 'last',
       segment: ':last',
-      plugs: [limitLength, capitalize]
+      plugs: [limitLength, capitalize],
+      effects: [segment => console.log(`:last = ${segment}`)]
     }]
 }]
 
