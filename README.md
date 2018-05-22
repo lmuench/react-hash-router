@@ -118,10 +118,14 @@ Type: `Array`
 
 An array of propFromPath objects
 
+#### propsFromQuery
+Type: `Array`
+
+An array of propFromQuery objects
 
 ## propFromPath object properties
 
-#### segment
+#### prop
 Type: `string`
 
 The name of a prop
@@ -135,6 +139,33 @@ A string that equals exactly one segment of the route's path
 Type: `array`
 
 An array of pure functions (one argument, one return value) intended for modifying the prop value
+
+#### effects
+Type: `array`
+
+An array of functions which receive the plug-modified prop as their first argument and produce side-effects (e.g. dispatch a Redux action)
+
+## propFromQuery object properties
+
+#### prop
+Type: `string`
+
+The name of a prop
+
+#### query
+Type: `string`
+
+The name of a query
+
+#### convert
+Type: `boolean`
+
+If true, strings will be converted to booleans and numbers if applicable.
+
+#### plugs
+Type: `array`
+
+An array of pure functions (one argument, one return value) intended for modifying the converted prop value
 
 #### effects
 Type: `array`
@@ -174,16 +205,26 @@ const routes = [{
   guards: [userIsLoggedIn],
   effects: [() => console.log('GET /hello/:first/:last')],
   propsFromPath: [{
-      prop: 'first',
-      segment: ':first',
-      plugs: [limitLength, abbreviate, capitalize],
-      effects: [segment => console.log(`:first = ${segment}`)]
-    }, {
-      prop: 'last',
-      segment: ':last',
-      plugs: [limitLength, capitalize],
-      effects: [segment => console.log(`:last = ${segment}`)]
-    }]
+    prop: 'first',
+    segment: ':first',
+    plugs: [limitLength, abbreviate, capitalize],
+    effects: [segment => console.log(`:first = ${segment}`)]
+  }, {
+    prop: 'last',
+    segment: ':last',
+    plugs: [limitLength, capitalize],
+    effects: [segment => console.log(`:last = ${segment}`)]
+  }],
+  propsFromQueries: [{
+    prop: 'printTimestamp',
+    query: 'timestamp',
+    convert: true
+  },{
+    prop: 'message',
+    query: 'message',
+    plugs: [capitalize],
+    effects: [query => console.log(`message = ${query}`)]
+  }]
 }]
 
 const defaultRoute = {
