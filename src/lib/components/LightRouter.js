@@ -28,10 +28,12 @@ class LightRouter extends Component {
     const propsFromPath = this.getPropsForRouteFromPath(route, segments);
 
     const queries = LightUrl.getQueries();
+    const propsFromQueries = this.getPropsForRouteFromQueries(route, queries);
 
     const props = {
       ...route.props,
-      ...propsFromPath
+      ...propsFromPath,
+      ...propsFromQueries
     }
 
     this.setState({
@@ -136,6 +138,42 @@ class LightRouter extends Component {
 
     }
 
+    return props;
+  }
+
+  getPropsForRouteFromQueries = (route, queries = []) => {
+    const props = {};
+
+    for (const query of queries) {
+
+      for (const propFromQuery of route.propsFromQueries) {
+        
+        if (query[0] === propFromQuery.query) {
+          
+          if (propFromQuery.convert) {
+            
+            if (query[1] === 'true') {
+              props[propFromQuery.prop] = true;
+            } else if (query[1] === 'false') {
+              props[propFromQuery.prop] = false;
+            } else if (isNaN(query[1])) {
+              props[propFromQuery.prop] = query[1];
+            } else {
+              props[propFromQuery.prop] = +query[1];  // converts string into a number
+            }
+
+          } else {
+            
+            props[propFromQuery.prop] = query[1];
+
+          }
+
+        }
+        
+      }
+
+    }
+    
     return props;
   }
 

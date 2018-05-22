@@ -25,16 +25,24 @@ const routes = [{
   guards: [userIsLoggedIn],
   effects: [() => console.log('GET /hello/:first/:last')],
   propsFromPath: [{
-      prop: 'first',
-      segment: ':first',
-      plugs: [limitLength, abbreviate, capitalize],
-      effects: [segment => console.log(`:first = ${segment}`)]
-    }, {
-      prop: 'last',
-      segment: ':last',
-      plugs: [limitLength, capitalize],
-      effects: [segment => console.log(`:last = ${segment}`)]
-    }]
+    prop: 'first',
+    segment: ':first',
+    plugs: [limitLength, abbreviate, capitalize],
+    effects: [segment => console.log(`:first = ${segment}`)]
+  }, {
+    prop: 'last',
+    segment: ':last',
+    plugs: [limitLength, capitalize],
+    effects: [segment => console.log(`:last = ${segment}`)]
+  }],
+  propsFromQueries: [{
+    prop: 'printTimestamp',
+    query: 'timestamp',
+    convert: true
+  },{
+    prop: 'message',
+    query: 'message',
+  }]
 }]
 
 const defaultRoute = {
