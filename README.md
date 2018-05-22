@@ -98,6 +98,11 @@ Type: `array`
 
 An array of parameterless functions which have to return true for a match
 
+#### effects
+Type: `array`
+
+An array of parameterless functions which produce side-effects (e.g. dispatch a Redux action)
+
 #### props
 Type: `array`
 
@@ -127,6 +132,11 @@ A string that equals exactly one segment of the route's path
 Type: `array`
 
 An array of pure functions (one argument, one return value) intended for modifying the prop value
+
+#### effects
+Type: `array`
+
+An array of functions which receive the plug-modified prop as their first argument and produce side-effects (e.g. dispatch a Redux action)
 
 ## demo
 Sources in `src/demo`
@@ -159,14 +169,17 @@ const routes = [{
   path: '/hello/:first/:last',
   component: Hello,
   guards: [userIsLoggedIn],
+  effects: [() => console.log('GET /hello/:first/:last')],
   propsFromPath: [{
       prop: 'first',
       segment: ':first',
-      plugs: [limitLength, abbreviate, capitalize]
+      plugs: [limitLength, abbreviate, capitalize],
+      effects: [segment => console.log(`:first = ${segment}`)]
     }, {
       prop: 'last',
       segment: ':last',
-      plugs: [limitLength, capitalize]
+      plugs: [limitLength, capitalize],
+      effects: [segment => console.log(`:last = ${segment}`)]
     }]
 }]
 
