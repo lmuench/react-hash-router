@@ -59,20 +59,23 @@ An optional default route to be used, when no route's path matches the current U
 }
 ```
 
-#### route with guards, props, propsFromPath and plugs
+#### route with guards, props, propsFromPath, plugs and effects
 ```jsx
 {
   path: '/hello/:first/:last',
   component: Hello,
   guards: [fooGuard, barGuard],
+  effects: [fooEffect],
   props: [{ foo: 'bar' }],
   propsFromPath: [{
     prop: 'first',
     segment: ':first',
-    plugs: [fooPlug, barPlug]
+    plugs: [fooPlug, barPlug],
+    effects: [barEffect]
   }, {
     prop: 'last',
-    segment: ':last'
+    segment: ':last',
+    effects: [bazEffect]
   }]
 }
 ```
