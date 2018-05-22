@@ -25,7 +25,14 @@ class LightRouter extends Component {
       }
     }
 
-    const props = this.getPropsForRoute(route, segments);
+    const propsFromPath = this.getPropsForRouteFromPath(route, segments);
+
+    const queries = LightUrl.getQueries();
+
+    const props = {
+      ...route.props,
+      ...propsFromPath
+    }
 
     this.setState({
       component: React.createElement(route.component, props)
@@ -98,8 +105,8 @@ class LightRouter extends Component {
    *   { last:, 'piper' }
    * ]
    */
-  getPropsForRoute = (route, segments) => {
-    const props = route.props ? route.props : {};
+  getPropsForRouteFromPath = (route, segments) => {
+    const props = {};
 
     if (route.path) {
 
@@ -109,9 +116,9 @@ class LightRouter extends Component {
         const position = routePathSegments.indexOf(element.segment);
 
         if (position < 0) return;
-
+        
         let segment = segments[position];
-
+        
         if (element.plugs) {
           for (const plug of element.plugs) {
             segment = plug(segment);

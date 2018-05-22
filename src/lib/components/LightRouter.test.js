@@ -89,7 +89,7 @@ describe('getRouteForPath()', () => {
   });
 });
 
-describe('getPropsForRoute()', () => {
+describe('getPropsForRouteFromPath()', () => {
   it('should get props from the path', () => {
     const router = new LightRouter();
     
@@ -102,7 +102,7 @@ describe('getPropsForRoute()', () => {
     }
     let segments = ['hello', 'peter', 'piper'];
     let expected = { first: 'peter', last: 'piper' };
-    let props = router.getPropsForRoute(route, segments);
+    let props = router.getPropsForRouteFromPath(route, segments);
     props.should.deepEqual(expected);
 
     route = {
@@ -114,7 +114,7 @@ describe('getPropsForRoute()', () => {
     }
     segments = ['foo', 'bar', 'peter', 'piper'];
     expected = { first: 'peter', last: 'piper' };
-    props = router.getPropsForRoute(route, segments);
+    props = router.getPropsForRouteFromPath(route, segments);
     props.should.deepEqual(expected);
 
     route = {
@@ -126,7 +126,7 @@ describe('getPropsForRoute()', () => {
     }
     segments = ['foo', 'peter', 'bar', 'piper'];
     expected = { first: 'peter', last: 'piper' };
-    props = router.getPropsForRoute(route, segments);
+    props = router.getPropsForRouteFromPath(route, segments);
     props.should.deepEqual(expected);
 
     route = {
@@ -138,7 +138,7 @@ describe('getPropsForRoute()', () => {
     }
     segments = ['peter', 'foo', 'bar', 'piper'];
     expected = { first: 'peter', last: 'piper' };
-    props = router.getPropsForRoute(route, segments);
+    props = router.getPropsForRouteFromPath(route, segments);
 
     props.should.deepEqual(expected);
     route = {
@@ -150,7 +150,7 @@ describe('getPropsForRoute()', () => {
     }
     segments = ['piper', 'peter'];
     expected = { first: 'peter', last: 'piper' };
-    props = router.getPropsForRoute(route, segments);
+    props = router.getPropsForRouteFromPath(route, segments);
     props.should.deepEqual(expected);
 
   });
