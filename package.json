@@ -4,7 +4,7 @@
   "author": "Ludwig Muench",
   "license": "MIT",
   "homepage": "https://github.com/lmuench/react-light-router",
-  "description": "A router for React",
+  "description": "A hash-based router for React",
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
