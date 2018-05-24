@@ -14,6 +14,7 @@ class LightRouter extends Component {
 
   handleNavigation = () => {
     const segments = LightUrl.getSegments();
+    const queries = LightUrl.getQueries();
 
     let route = this.getRouteForPath(this.props.routes, segments);
     if (!route) route = this.props.defaultRoute;
@@ -26,8 +27,6 @@ class LightRouter extends Component {
     }
 
     const propsFromPath = this.getPropsForRouteFromPath(route, segments);
-
-    const queries = LightUrl.getQueries();
     const propsFromQueries = this.getPropsForRouteFromQueries(route, queries);
 
     const props = {
