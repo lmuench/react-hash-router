@@ -41,9 +41,9 @@ class LightRouter extends Component {
   }
 
   /**
-   * @param {array} routes - array of routes
-   * @param {array} segments - path segments
-   * @return {Object} route
+   * @param {array} routes - array of user-defined routes
+   * @param {array} segments - hash-based path segments from current URL
+   * @return {Object} route matching current browser URL's hash-based path or null
    * @example route
    * {
    *   path: '/hello/:first/:last',
@@ -96,15 +96,15 @@ class LightRouter extends Component {
   }
 
   /**
-   * @param {Object} route - route
-   * @param {array} segments - path segments
-   * @return {array} props
+   * @param {Object} route - route matching the current hash-based path
+   * @param {array} segments - hash-based path segments from current browser URL
+   * @return {Object} props extracted from hash-based path
    * @example props
-   * [
-   *   { foo: 'bar' },
-   *   { first: 'peter'},
-   *   { last:, 'piper' }
-   * ]
+   *  {
+   *    first: 'peter',
+   *    last: 'piper'
+   *  }
+   * 
    */
   getPropsForRouteFromPath = (route, segments) => {
     const props = {};
@@ -140,6 +140,17 @@ class LightRouter extends Component {
     return props;
   }
 
+  /**
+   * @param {Object} route - route matching the current hash-based path
+   * @param {array} queries - hash-based queries from current browser URL
+   * @return {Object} props extracted from hash-based queries
+   * @example props
+   *  {
+   *    sort: 'new',
+   *    filter: 'important'
+   *  }
+   * 
+   */
   getPropsForRouteFromQueries = (route, queries = []) => {
     const props = {};
 
