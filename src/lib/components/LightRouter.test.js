@@ -29,7 +29,6 @@ describe('getRouteForPath()', () => {
 
   const correctBrowserPathsA = [
     '#/hello/peter/piper',
-    '#/hello/peter/piper/foo',
     '#/hello/peter/piper?foo=bar',
     '#/hello/peter/piper?foo=bar&bar=foo',
     '#/hello/peter/piper/?foo=bar&bar=foo'
@@ -38,8 +37,6 @@ describe('getRouteForPath()', () => {
   const correctBrowserPathsB = [
     '#/ticker/BTCUSDT/price',
     '#/ticker/BTCUSDT/price/',
-    '#/ticker/BTCUSDT/price//',
-    '#/ticker/BTCUSDT/price/change'
   ].map(path => LightUrl.extractSegments(path));
 
   const incorrectBrowserPathsA = [

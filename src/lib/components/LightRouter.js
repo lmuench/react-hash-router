@@ -16,7 +16,7 @@ class LightRouter extends Component {
     const segments = LightUrl.getSegments();
     const queries = LightUrl.getQueries();
 
-    let route = this.getRouteForPath(this.props.routes.reverse(), segments);
+    let route = this.getRouteForPath(this.props.routes, segments);
     if (!route) route = this.props.defaultRoute;
     if (!route) return;
 
@@ -71,7 +71,9 @@ class LightRouter extends Component {
         }
       }
 
-      if (segments.length < routePathSegments.length) return false;
+      if (segments[segments.length - 1] === '') segments.pop();
+
+      if (segments.length != routePathSegments.length) return false;
 
       let match = true;
       let propIndex = 0;
