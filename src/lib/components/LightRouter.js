@@ -79,7 +79,7 @@ class LightRouter extends Component {
 
       if (segments[segments.length - 1] === '') segments.pop();
 
-      if (segments.length != routePathSegments.length) return false;
+      if (segments.length !== routePathSegments.length) return false;
 
       let match = true;
       let propIndex = 0;
