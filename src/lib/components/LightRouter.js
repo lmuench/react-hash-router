@@ -80,8 +80,8 @@ class LightRouter extends Component {
         if (routePathSegments[i] !== segments[i]) {
           if (
             !segments[i] ||
-            !route.propsFromPath[propIndex] ||
-            routePathSegments[i] !== route.propsFromPath[propIndex].segment
+            (route.propsFromPath && !route.propsFromPath[propIndex]) ||
+            (route.propsFromPath && routePathSegments[i] !== route.propsFromPath[propIndex].segment)
           ) {
             match = false;
             break;
