@@ -113,26 +113,30 @@ class LightRouter extends Component {
 
       const routePathSegments = LightUrl.extractSegments(route.path);
 
-      for (const element of route.propsFromPath) {
-        const position = routePathSegments.indexOf(element.segment);
+      if (route.propsFromPath) {
 
-        if (position < 0) return;
-        
-        let segment = segments[position];
-        
-        if (element.plugs) {
-          for (const plug of element.plugs) {
-            segment = plug(segment);
+        for (const element of route.propsFromPath) {
+          const position = routePathSegments.indexOf(element.segment);
+
+          if (position < 0) return;
+
+          let segment = segments[position];
+
+          if (element.plugs) {
+            for (const plug of element.plugs) {
+              segment = plug(segment);
+            }
           }
+
+          if (element.effects) {
+            for (const effect of element.effects) {
+              effect(segment);
+            }
+          }
+
+          props[element.prop] = segment;
         }
 
-        if (element.effects) {
-          for (const effect of element.effects) {
-            effect(segment);
-          }
-        }
-        
-        props[element.prop] = segment;
       }
 
     }
@@ -157,9 +161,9 @@ class LightRouter extends Component {
     for (const query of queries) {
 
       for (const propFromQuery of route.propsFromQueries) {
-        
+
         if (query[0] === propFromQuery.query) {
-          
+
           let prop = '';
 
           if (propFromQuery.convert) {
@@ -175,7 +179,7 @@ class LightRouter extends Component {
             }
 
           } else {
-            
+
             prop = query[1];
 
           }
@@ -195,11 +199,11 @@ class LightRouter extends Component {
           props[propFromQuery.prop] = prop;
 
         }
-        
+
       }
 
     }
-    
+
     return props;
   }
 
