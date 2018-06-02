@@ -63,13 +63,19 @@ class LightRouter extends Component {
   getRouteForPath = (routes, segments) => {
 
     const route = routes.find(route => {
-      const routePathSegments = LightUrl.extractSegments(route.path);
 
       if (route.guards) {
         for (const guard of route.guards) {
           if (guard() !== true) return false;
         }
       }
+
+      let routePath = route.path;
+      if (routePath.charAt(0) !== '/') {
+        routePath = '/' + routePath;
+      }
+
+      const routePathSegments = LightUrl.extractSegments(routePath);
 
       if (segments[segments.length - 1] === '') segments.pop();
 
