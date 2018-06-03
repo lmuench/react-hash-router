@@ -26,7 +26,12 @@ E.g. `example.com` will become `example.com/#/foo/bar` without a page-reload. Th
 #### path
 Type: `string`
 
-A hash-based path which the component links to.
+A hash-based path which the component links to
+
+#### style
+Type: `object`
+
+A React inline style object
 
 
 ## LightRouter
