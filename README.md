@@ -1,6 +1,8 @@
 # react-light-router
 Sources in `src/lib`
 
+*A demo project can be found here: https://github.com/lmuench/notes-spa*
+
 #### install
 `npm install --save react-light-router`
 
